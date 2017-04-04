@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import 'main/main.css';
+import routes from './config/routes';
 
-class App extends Component {
-    render() {
-        return (
-            <div>
-            Hello World!
-            </div>
-        )
-    }
-}
+/*
+
+    Focused
+    Independant
+    Reusable
+    Small
+    Testable
+
+*/
+
 
 ReactDOM.render(
-    <App />,
+    routes,
     document.getElementById('app')
-) 
-
+)
