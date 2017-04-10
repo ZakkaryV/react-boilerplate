@@ -1,66 +1,84 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Todo from './Todo';
+import TodoList from './TodoList';
+require('./css/main.css');
 
-const TodoItem = (props) => {
-    const { handleClick, todoName } = props;
-        return (
-            <div>
-            <input type="text" placeholder={todoName}></input>
-            <button onClick={() => handleClick()}>X</button>
-            </div>
-        )
-    }
 
-class Todo extends Component {
-    constructor() {
-        super();
-    }
-
-    render() {
-        return (
-            <div>
-            <TodoItem />
-            </div>
-        )
-    }
-}
-
-class AddTodo extends Component {
-    constructor() {
-        super();
-    }
-
-    render() {
-        return (
-            <div>
-            </div>
-        )
-    }
-}
+// e.targetID
 
 class App extends Component {
     constructor(props) {
         super(props);
-        
-        this.state = {
-            todos: ['Do stuff', 'Benchmark PC', 'more things']
-        }
 
-        this.handleClick = this.handleClick.bind(this)
+        this.addTodo  = this.addTodo.bind(this);  
+        this.onChange = this.onChange.bind(this);
+        this.deleteItem   = this.deleteItem.bind(this);
+        this.printItems   = this.printItems.bind(this);
+         
+        this.state = {
+            todos: [
+                {
+                    text: 'Do Stuff',
+                    isntDone: true,
+                    key: 0
+                },
+                {
+                    text: 'Benchmark PC',
+                    isntDone: true,
+                    key: 1
+                },
+                {
+                    text: 'more things',
+                    isntDone: false,
+                    key: 2
+                }
+            ],
+            text: ''
+        }
     }
-// e.targetID
-    handleClick() {
-        console.log('clicked')
+
+    addTodo (e) {
+        e.preventDefault();
+        let todo = this.state.todos;
+        let newTodo = this.state.text;
+        let newKey = todo[todo.length -1].key + 1;
+        todo.push({text: newTodo, isntDone: true, key: newKey})
+        this.setState({todos: todo})
     }
+    
+    onChange(e) {
+        this.setState({text: e.target.value})
+    }
+
+    deleteItem(a) {
+        a.preventDefault();
+        let oldTodos = this.state.todos;
+        let newTodos = this.state.todos.splice(a.target.value, 1);
+        this.setState({todos: oldTodos});
+        console.log(oldTodos);
+    }
+
+
+    printItems(e) {
+        e.preventDefault();
+        let todoItems = this.state.todos.map((a) => {
+            return <li key={a.key}>
+                    <div className='.active'>{a.text}</div>
+                    <button className="done-btn" type="submit" onClick={this.deleteItem} value={a.key}>+</button>
+                    </li>
+        });
+    }
+
 
     render() {
-        let display = this.state.todos.map((a) => {
-            return <TodoItem todoName={a} handleClick={this.handleClick} />
-        });
         return (
-            <div>
-            To Do List
-            {display}
+            <div className="app">
+                <h1>To Do List</h1>
+                <form onSubmit={this.addTodo}>
+                <input id="input" type="text" value={this.state.text} placeholder="Add Todo" onChange={this.onChange} />
+                </form>
+                <TodoList todos={this.state.todos} printItems={this.printItems}/>
             </div>
         )
     }

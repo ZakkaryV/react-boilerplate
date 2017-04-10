@@ -1,5 +1,49 @@
 body {
-  background-color: black;
-  display: flex; }
+  background-color:beige;
+  display: flex;
+  justify-content: center; 
+  }
 
-/*# sourceMappingURL=main.css.map */
+li { 
+  list-style-type: none;
+  display: flex; 
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.app {
+  border: 1px solid black;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.add-todo {
+  text-align: center;
+}
+
+.active-todos {
+  padding-top: 20px; 
+}
+
+.active-todo-item {
+  text-align: left;
+}
+
+.inactive {
+  text-decoration: line-through;
+}
+
+.done-btn {
+  background-color: green;
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.delete-btn {
+  background-color: red;
+}
+
+.todo-text {
+  width: 400px;
+}
