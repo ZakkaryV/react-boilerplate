@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Todo from './Todo';
 import TodoList from './TodoList';
-require('./css/main.css');
-
-
-// e.targetID
+import './css/main.css';
 
 class App extends Component {
     constructor(props) {
