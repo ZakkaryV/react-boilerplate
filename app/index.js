@@ -10,8 +10,8 @@ class App extends Component {
 
         this.addTodo  = this.addTodo.bind(this);  
         this.onChange = this.onChange.bind(this);
-        this.deleteItem   = this.deleteItem.bind(this);
         this.printItems   = this.printItems.bind(this);
+        this.deleteItems = this.deleteItems.bind(this);
          
         this.state = {
             todos: [
@@ -41,30 +41,27 @@ class App extends Component {
         let newTodo = this.state.text;
         let newKey = todo[todo.length -1].key + 1;
         todo.push({text: newTodo, isntDone: true, key: newKey})
-        this.setState({todos: todo})
+        this.setState({todos: todo, text: ''})
     }
     
     onChange(e) {
         this.setState({text: e.target.value})
     }
 
-    deleteItem(a) {
-        a.preventDefault();
-        let oldTodos = this.state.todos;
-        let newTodos = this.state.todos.splice(a.target.value, 1);
-        this.setState({todos: oldTodos});
-        console.log(oldTodos);
-    }
-
-
     printItems(e) {
         e.preventDefault();
         let todoItems = this.state.todos.map((a) => {
             return <li key={a.key}>
                     <div className='.active'>{a.text}</div>
-                    <button className="done-btn" type="submit" onClick={this.deleteItem} value={a.key}>+</button>
+                    <button className="done-btn" type="submit" value={a.key}>+</button>
                     </li>
         });
+    }
+
+    deleteItems(e) {
+        e.preventDefault();
+        console.log(this.state);
+        
     }
 
 
@@ -75,7 +72,7 @@ class App extends Component {
                 <form onSubmit={this.addTodo}>
                 <input id="input" type="text" value={this.state.text} placeholder="Add Todo" onChange={this.onChange} />
                 </form>
-                <TodoList todos={this.state.todos} printItems={this.printItems}/>
+                <TodoList todos={this.state.todos} printItems={this.printItems} deleteItems={this.deleteItems} whichItem={0} />
             </div>
         )
     }

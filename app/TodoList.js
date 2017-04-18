@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import './index';
 
 const TodoList = (props) => {
-    const { todos } = props;
+
+    const { todos, deleteItems } = props;
 
     let todoItems = todos.map((a) => {
         return <li key={a.key}>
                 <div className='.active'>{a.text}</div>
-                <button className="done-btn" type="submit" onClick={this.deleteItem} value={a.key}>+</button>
+                <button className="done-btn" type="submit" onClick={() => {console.log(props)} } value={a.key}>+</button>
                 </li>
     });
 
