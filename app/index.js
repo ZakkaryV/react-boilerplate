@@ -10,25 +10,21 @@ class App extends Component {
 
         this.addTodo  = this.addTodo.bind(this);  
         this.onChange = this.onChange.bind(this);
-        this.printItems   = this.printItems.bind(this);
         this.deleteItems = this.deleteItems.bind(this);
          
         this.state = {
             todos: [
                 {
                     text: 'Do Stuff',
-                    isntDone: true,
-                    key: 0
+                    isntDone: true
                 },
                 {
                     text: 'Benchmark PC',
-                    isntDone: true,
-                    key: 1
+                    isntDone: true
                 },
                 {
                     text: 'more things',
-                    isntDone: false,
-                    key: 2
+                    isntDone: false
                 }
             ],
             text: ''
@@ -39,8 +35,7 @@ class App extends Component {
         e.preventDefault();
         let todo = this.state.todos;
         let newTodo = this.state.text;
-        let newKey = todo[todo.length -1].key + 1;
-        todo.push({text: newTodo, isntDone: true, key: newKey})
+        todo.push({text: newTodo, isntDone: true})
         this.setState({todos: todo, text: ''})
     }
     
@@ -48,18 +43,10 @@ class App extends Component {
         this.setState({text: e.target.value})
     }
 
-    printItems(e) {
-        e.preventDefault();
-        let todoItems = this.state.todos.map((a) => {
-            return <li key={a.key}>
-                    <div className='.active'>{a.text}</div>
-                    <button className="done-btn" type="submit" value={a.key}>+</button>
-                    </li>
-        });
-    }
 
     deleteItems(e) {
-        e.preventDefault();
+        let plusOne = e;
+        this.setState({todos: plusOne});
         console.log(this.state);
         
     }
@@ -72,7 +59,7 @@ class App extends Component {
                 <form onSubmit={this.addTodo}>
                 <input id="input" type="text" value={this.state.text} placeholder="Add Todo" onChange={this.onChange} />
                 </form>
-                <TodoList todos={this.state.todos} printItems={this.printItems} deleteItems={this.deleteItems} whichItem={0} />
+                <TodoList todos={this.state.todos} deleteItems={this.deleteItems} />
             </div>
         )
     }

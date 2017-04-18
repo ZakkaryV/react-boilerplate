@@ -1,16 +1,14 @@
 import React, { Componenet } from 'react';
 import ReactDOM from 'react-dom';
 import './index';
+import TodoItem from './TodoItem';
 
 const TodoList = (props) => {
 
     const { todos, deleteItems } = props;
 
     let todoItems = todos.map((a) => {
-        return <li key={a.key}>
-                <div className='.active'>{a.text}</div>
-                <button className="done-btn" type="submit" onClick={() => {console.log(props)} } value={a.key}>+</button>
-                </li>
+        return <TodoItem text={a.text} />
     });
 
         return (
