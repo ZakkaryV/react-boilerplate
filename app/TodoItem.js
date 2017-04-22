@@ -2,16 +2,20 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import TodoList from './TodoList';
 
-const TodoItem = (props) => {
+class TodoItem extends Component {
+    constructor(props) {
+        super(props);
 
-    let { text, deleteItems, key } = props;
+    }
 
-    return (
-        <li className="active-todo-item">
-            <div className='.active'>- {text}</div>
-            <button className="done-btn" type="submit" onClick={deleteItems} >+</button>
+    render() {
+        return (
+            <li className="active-todo-item">
+                <div className='.active'>- {this.props.text}</div>
+            <button className="done-btn" type="submit" id={this.props.id} onClick={this.props.deleteItems} >+</button>
         </li>
-    )
+        )
+    }
 }
 
 export default TodoItem;

@@ -1,21 +1,25 @@
-import React, { Componenet } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index';
 import TodoItem from './TodoItem';
 
-const TodoList = (props) => {
+class TodoList extends Component {
+    constructor(props) {
+        super(props);
+    }
 
-    const { todos, deleteItems, initKey } = props;
+    render() {
 
-    let todoItems = todos.map((a) => {
-        return <TodoItem text={a.text} deleteItems={deleteItems} key={key} />
-    });
-
+        let todoItems = this.props.todos.map((todo) => {
+            return <TodoItem text={todo.text} id={todo.id} deleteItems={this.props.deleteItems} />
+        });
+        
         return (
             <div className="active-todos">
-                {todoItems}
+               {todoItems}
             </div>
-    )
+        )
+    }
 };
 
 export default TodoList;

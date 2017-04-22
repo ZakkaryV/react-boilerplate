@@ -16,15 +16,18 @@ class App extends Component {
             todos: [
                 {
                     text: 'Do Stuff',
-                    isntDone: true
+                    isntDone: true,
+                    id: '001'
                 },
                 {
                     text: 'Benchmark PC',
-                    isntDone: true
+                    isntDone: true,
+                    id: '002'
                 },
                 {
                     text: 'more things',
-                    isntDone: false
+                    isntDone: false,
+                    id: '003'
                 }
             ],
             text: '',
@@ -36,7 +39,7 @@ class App extends Component {
         e.preventDefault();
         let todo = this.state.todos;
         let newTodo = this.state.text;
-        todo.push({text: newTodo, isntDone: true})
+        todo.push({text: newTodo, isntDone: true, id: Date.now().toString()});
         this.setState({todos: todo, text: ''})
     }
     
@@ -46,7 +49,15 @@ class App extends Component {
 
 
     deleteItems(e) {
-        console.log(e.target);
+        let array = this.state.todos;
+        let index = '';
+        array.map((val) => {
+            if (val.id === e.target.id) {
+                index = array.indexOf(val);
+            }
+        });
+        array.splice(index, 1);
+        this.setState({ todos: array });
     }
 
     render() {
@@ -56,7 +67,7 @@ class App extends Component {
                 <form onSubmit={this.addTodo}>
                 <input id="input" type="text" value={this.state.text} placeholder="Add Todo" onChange={this.onChange} />
                 </form>
-                <TodoList todos={this.state.todos} deleteItems={this.deleteItems} initKey={this.state.initKey} />
+                <TodoList todos={this.state.todos} deleteItems={this.deleteItems} />
             </div>
         )
     }
