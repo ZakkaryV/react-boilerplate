@@ -27,7 +27,8 @@ class App extends Component {
                     isntDone: false
                 }
             ],
-            text: ''
+            text: '',
+            initKey: -1
         }
     }
 
@@ -45,12 +46,8 @@ class App extends Component {
 
 
     deleteItems(e) {
-        let plusOne = e;
-        this.setState({todos: plusOne});
-        console.log(this.state);
-        
+        console.log(e.target);
     }
-
 
     render() {
         return (
@@ -59,7 +56,7 @@ class App extends Component {
                 <form onSubmit={this.addTodo}>
                 <input id="input" type="text" value={this.state.text} placeholder="Add Todo" onChange={this.onChange} />
                 </form>
-                <TodoList todos={this.state.todos} deleteItems={this.deleteItems} />
+                <TodoList todos={this.state.todos} deleteItems={this.deleteItems} initKey={this.state.initKey} />
             </div>
         )
     }

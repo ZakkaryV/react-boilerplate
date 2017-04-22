@@ -1,7 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
+
 body {
   background-color:white;
   display: flex;
-  justify-content: center; 
+  justify-content: center;
+  font-family:  'Raleway', sans-serif;
   }
 
 li { 
@@ -9,13 +12,24 @@ li {
   display: flex; 
   flex-direction: row;
   justify-content: space-between;
+  transition-duration: 1s;
 }
 
-.app {
-  border: 1px solid black;
-  padding: 20px;
+li:hover {
+  background-color: rgba(0,0,0,.1);
+  transition-duration: 1s;
+}
+
+#app {
+  padding: 5px;
   width: 100%;
-  text-align: center;
+  max-width: 425px;
+  background-color: white;
+}
+
+.app > h1 {
+  font-size: 38px;
+  text-align: left;
 }
 
 .add-todo {
@@ -28,16 +42,34 @@ li {
 
 .active-todo-item {
   text-align: left;
+  padding: 20px 0px;
+  width: 100%;
+  font-size: 17px;
 }
 
-.inactive {
-  text-decoration: line-through;
+#input {
+  border: none;
+  padding-left: 2px;
+  border-bottom: 1px solid black;
+  font-size: 22px;
+  min-width: 100px;
+  min-width: 272px;
+  width: 24%;
+  -webkit-transition-duration: 2s;
+}
+
+#input:focus {
+  width: 75%;
+  background-color: yellowgreen;
+  color: rgba(0,0,0,0.7);
+  border-bottom: 1px solid black;
+  -webkit-transition-duration: 2s;
 }
 
 .done-btn {
-  background-color: green;
+  background-color: rgba(0,0,0,.8);
+  color: white;
   display: inline-block;
-  margin-left: 40px;
 }
 
 .delete-btn {

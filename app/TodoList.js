@@ -5,10 +5,10 @@ import TodoItem from './TodoItem';
 
 const TodoList = (props) => {
 
-    const { todos, deleteItems } = props;
+    const { todos, deleteItems, initKey } = props;
 
     let todoItems = todos.map((a) => {
-        return <TodoItem text={a.text} />
+        return <TodoItem text={a.text} deleteItems={deleteItems} key={key} />
     });
 
         return (

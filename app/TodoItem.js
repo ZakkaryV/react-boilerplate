@@ -4,21 +4,12 @@ import TodoList from './TodoList';
 
 const TodoItem = (props) => {
 
-    let { text, key } = props;
-
-    let deleteIt = (e) => {
-    let newArray = todos.splice(e.target.key,1);
-    if (newArray.length < 1) {
-        deleteItems([{text: 'add a todo ^', isntDone: false}]);
-    }
-    deleteItems(todos);
-    console.log(e);
-}
+    let { text, deleteItems, key } = props;
 
     return (
-        <li>
-            <div className='.active'>{text}</div>
-            <button className="done-btn" type="submit" onClick={() => {deleteIt(key)}} key={key}>+</button>
+        <li className="active-todo-item">
+            <div className='.active'>- {text}</div>
+            <button className="done-btn" type="submit" onClick={deleteItems} >+</button>
         </li>
     )
 }
