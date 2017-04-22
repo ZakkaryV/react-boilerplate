@@ -1,22 +1,31 @@
-import React, { Componenet } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index';
+import TodoItem from './TodoItem';
 
-const TodoList = (props) => {
-    const { todos } = props;
+class TodoList extends Component {
+    constructor(props) {
+        super(props);
+    }
 
-    let todoItems = todos.map((a) => {
-        return <li key={a.key}>
-                <div className='.active'>{a.text}</div>
-                <button className="done-btn" type="submit" onClick={this.deleteItem} value={a.key}>+</button>
-                </li>
-    });
 
+    render() {
+
+        let todoItems = this.props.todos.map((todo) => {
+            return <TodoItem text={todo.text}
+                             id={todo.id}
+                             deleteItems={this.props.deleteItems}
+                             key={todo.id}
+                             isntDone={todo.isntDone}
+                             toggleClass={this.props.toggleClass} />
+        });
+        
         return (
             <div className="active-todos">
-                {todoItems}
+               {todoItems}
             </div>
-    )
+        )
+    }
 };
 
 export default TodoList;

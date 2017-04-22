@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Todo from './Todo';
 import TodoList from './TodoList';
-require('./css/main.css');
-
-
-// e.targetID
+import './css/main.css';
 
 class App extends Component {
     constructor(props) {
@@ -13,28 +9,29 @@ class App extends Component {
 
         this.addTodo  = this.addTodo.bind(this);  
         this.onChange = this.onChange.bind(this);
-        this.deleteItem   = this.deleteItem.bind(this);
-        this.printItems   = this.printItems.bind(this);
+        this.deleteItems = this.deleteItems.bind(this);
+        this.toggleClass = this.toggleClass.bind(this);
          
         this.state = {
             todos: [
                 {
                     text: 'Do Stuff',
-                    isntDone: true,
-                    key: 0
+                    isntDone: 'active-todo',
+                    id: '001'
                 },
                 {
                     text: 'Benchmark PC',
-                    isntDone: true,
-                    key: 1
+                    isntDone: 'active-todo',
+                    id: '002'
                 },
                 {
                     text: 'more things',
-                    isntDone: false,
-                    key: 2
+                    isntDone: 'inactive-todo',
+                    id: '003'
                 }
             ],
-            text: ''
+            text: '',
+            initKey: -1
         }
     }
 
@@ -42,34 +39,47 @@ class App extends Component {
         e.preventDefault();
         let todo = this.state.todos;
         let newTodo = this.state.text;
-        let newKey = todo[todo.length -1].key + 1;
-        todo.push({text: newTodo, isntDone: true, key: newKey})
-        this.setState({todos: todo})
+        todo.push({text: newTodo, isntDone: 'active-todo', id: Date.now().toString()});
+        this.setState({todos: todo, text: ''})
     }
     
     onChange(e) {
         this.setState({text: e.target.value})
     }
 
-    deleteItem(a) {
-        a.preventDefault();
-        let oldTodos = this.state.todos;
-        let newTodos = this.state.todos.splice(a.target.value, 1);
-        this.setState({todos: oldTodos});
-        console.log(oldTodos);
+
+    deleteItems(e) {
+        let array = this.state.todos;
+        let index = '';
+        array.map((val) => {
+            if (val.id === e.target.id) {
+                index = array.indexOf(val);
+            }
+        }); 
+        array.splice(index, 1);
+        this.setState({ todos: array });
     }
 
-
-    printItems(e) {
-        e.preventDefault();
-        let todoItems = this.state.todos.map((a) => {
-            return <li key={a.key}>
-                    <div className='.active'>{a.text}</div>
-                    <button className="done-btn" type="submit" onClick={this.deleteItem} value={a.key}>+</button>
-                    </li>
+    toggleClass(e) {
+        let currentState = document.getElementById(e.target.id).className;
+        let currentId = e.target.id;
+        let array = this.state.todos;
+        let index = '';
+        array.map((todo) => {
+            if (todo.id === currentId) {
+                index = array.indexOf(todo);
+            }
         });
+        console.log(currentState);
+        if (currentState === 'active-todo') {
+            array[index].isntDone = 'inactive-todo';
+            this.setState({ todos: array });
+        } else if (currentState === 'inactive-todo') {
+            array[index].isntDone = 'active-todo';
+            this.setState({ todos: array });
+        }
+        
     }
-
 
     render() {
         return (
@@ -78,7 +88,7 @@ class App extends Component {
                 <form onSubmit={this.addTodo}>
                 <input id="input" type="text" value={this.state.text} placeholder="Add Todo" onChange={this.onChange} />
                 </form>
-                <TodoList todos={this.state.todos} printItems={this.printItems}/>
+                <TodoList todos={this.state.todos} deleteItems={this.deleteItems} toggleClass={this.toggleClass} />
             </div>
         )
     }
