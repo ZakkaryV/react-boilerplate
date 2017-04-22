@@ -8,14 +8,16 @@ class TodoList extends Component {
         super(props);
     }
 
-    toggleClass(e) {
-        console.log('test');
-    }
 
     render() {
 
         let todoItems = this.props.todos.map((todo) => {
-            return <TodoItem text={todo.text} id={todo.id} deleteItems={this.props.deleteItems} />
+            return <TodoItem text={todo.text}
+                             id={todo.id}
+                             deleteItems={this.props.deleteItems}
+                             key={todo.id}
+                             isntDone={todo.isntDone}
+                             toggleClass={this.props.toggleClass} />
         });
         
         return (

@@ -7,6 +7,10 @@ body {
   font-family:  'Raleway', sans-serif;
   }
 
+input:focus {
+  outline: none;
+}
+
 li { 
   list-style-type: none;
   display: flex; 
@@ -15,13 +19,7 @@ li {
   transition-duration: 1s;
 }
 
-li button {
-  display: flex; 
-  justify-content: flex-end;
-}
-
 li:hover {
-  background-color: rgba(0,0,0,.1);
   transition-duration: 1s;
 }
 
@@ -41,8 +39,14 @@ li:hover {
   text-align: center;
 }
 
-.active-todos {
+.active-todo {
   padding-top: 20px; 
+}
+
+.inactive-todo {
+  color: rgba(25,25,25,0.6);
+  padding-top: 20px;
+  text-decoration: line-through;
 }
 
 .active-todo-item {
@@ -58,29 +62,34 @@ li:hover {
   border-bottom: 1px solid black;
   font-size: 22px;
   min-width: 100px;
-  min-width: 272px;
-  width: 24%;
-  -webkit-transition-duration: 2s;
+  width: 15%;
+  -webkit-transition-duration: 3s;
 }
 
 #input:focus {
   width: 75%;
-  background-color: yellowgreen;
   color: rgba(0,0,0,0.7);
   border-bottom: 1px solid black;
-  -webkit-transition-duration: 2s;
+  -webkit-transition-duration: 3s;
 }
 
 .done-btn {
-  background-color: rgba(66, 244, 119,.8);
-  color: white;
+  background-color: white;
+  width: 30px;
   display: inline-block;
 }
 
 .delete-btn {
-  background-color: red;
+  margin-left: 20px;
+  width: 30px;
 }
 
 .todo-text {
   width: 400px;
+}
+
+
+.buttons {
+  display: flex;
+  flex-direction: row;
 }

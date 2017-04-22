@@ -6,23 +6,17 @@ class TodoItem extends Component {
     constructor(props) {
         super(props);
 
-        this.toggleClass = this.toggleClass.bind(this);
-
-    }
-
-    toggleClass(e) {
-        console.log(e.target.className);
     }
 
     render() {
 
-
-
         return (
             <li className="active-todo-item">
-                <div className='.active'>- {this.props.text}</div>
-            <button className="done-btn" type="submit" id={this.props.id} onClick={this.toggleClass} >+</button>
-            <button className="delete-btn" type="submit" id={this.props.id} onClick={this.props.deleteItems} >+</button>
+                <div className={this.props.isntDone} id={this.props.id} onClick={this.props.toggleClass}>- {this.props.text}</div>
+            <div className="buttons">
+            <button className="done-btn" type="submit" id={this.props.id} onClick={this.props.toggleClass} ></button>
+            <button className="delete-btn" type="submit" id={this.props.id} onClick={this.props.deleteItems} ></button>
+            </div>
         </li>
         )
     }
