@@ -8,6 +8,10 @@ class TodoList extends Component {
         super(props);
     }
 
+    toggleClass(e) {
+        console.log('test');
+    }
+
     render() {
 
         let todoItems = this.props.todos.map((todo) => {

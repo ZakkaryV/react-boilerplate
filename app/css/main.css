@@ -15,6 +15,11 @@ li {
   transition-duration: 1s;
 }
 
+li button {
+  display: flex; 
+  justify-content: flex-end;
+}
+
 li:hover {
   background-color: rgba(0,0,0,.1);
   transition-duration: 1s;
@@ -67,7 +72,7 @@ li:hover {
 }
 
 .done-btn {
-  background-color: rgba(0,0,0,.8);
+  background-color: rgba(66, 244, 119,.8);
   color: white;
   display: inline-block;
 }
